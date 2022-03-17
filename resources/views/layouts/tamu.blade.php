@@ -49,23 +49,7 @@
                             <p>Hotel kami berdiri sejak 2021 awal januari hingga sekarang kami masih mengembangkan hotel kami.</p>
                         </div>
                     </div>
-                    						
-                    
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="single-footer-widget instafeed">
-                            <h6 class="footer_title">InstaFeed</h6>
-                            <ul class="list_style instafeed d-flex flex-wrap">
-                                <li><img src="/myland/image/instagram/Image-01.jpg" alt=""></li>
-                                <li><img src="/myland/image/instagram/Image-02.jpg" alt=""></li>
-                                <li><img src="/myland/image/instagram/Image-03.jpg" alt=""></li>
-                                <li><img src="/myland/image/instagram/Image-04.jpg" alt=""></li>
-                                <li><img src="/myland/image/instagram/Image-05.jpg" alt=""></li>
-                                <li><img src="/myland/image/instagram/Image-06.jpg" alt=""></li>
-                                <li><img src="/myland/image/instagram/Image-07.jpg" alt=""></li>
-                                <li><img src="/myland/image/instagram/Image-08.jpg" alt=""></li>
-                            </ul>
-                        </div>
-                    </div>						
+                    												
                 </div>
                 <div class="border_line"></div>
                 <div class="row footer-bottom d-flex justify-content-between align-items-center">

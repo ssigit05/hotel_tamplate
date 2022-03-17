@@ -32,7 +32,7 @@
 <div class="container">
     <div class="section_title text-center">
         <h2 class="title_w">Fasilitas Hotel</h2>
-        <p>Fasilitas yang kami miliki di hotel ini.</p>
+        <p>Fasilitas yang dimiliki hotel ini.</p>
     </div>
     <div class="row mb_30">
         <div class="col-lg-4 col-md-6">

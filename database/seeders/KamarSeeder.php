@@ -14,6 +14,6 @@ class KamarSeeder extends Seeder
      */
     public function run()
     {
-        Kamar::factory(10)->create();
+        Kamar::factory(4)->create();
     }
 }

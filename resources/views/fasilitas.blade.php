@@ -1,29 +1,39 @@
 @extends('layouts.tamu',['title'=>'Fasilitas'])
 
 @section('content')
-    <div class="container justify-content_center">
+<section class="blog_area">
+    <div class="container">
         <div class="section_title text-center">
             <h2 class="title_color">Fasilitas</h2>
         </div>
-        <div class="section-top-border">
+        <div class="row">
             @foreach ($fasilitas as $item)
-            <a href="{{ route('guest.fasilitas.show',['fasilitas'=>$item->id])}}">
-                <h3 class="mb-30 title_color">{{ $item->nama_fasilitas_hotel }}</h3>
-            </a>
-                
-                <div class="row">
-                    <div class="col-md-3">
-                        <img src="{{ $item->foto_fasilitas_hotel}}"  class="img-fluid rounded img-thumbnail">
-                    </div>
-                    <div class="col-md-9 mt-sm-20 left-align-p">
-                        <p>{{ $item->deskripsi_fasilitas_hotel}}</p>
-                    </div>
-                </div>
-            @endforeach
-            
+            <div class="col-md-3">
+                <div class="blog_left_sidebar">
+                    <article class="row blog_item justify-content-center">
+                       
+                        <div class="col-md-12">
+                            <div class="blog_post ">
+                                
+                                
+                                    <img src="{{ $item->foto_fasilitas_hotel}}" alt="" class="mt-3">
+                                    <div class="blog_details">
+                                        <a href="{{ route('guest.fasilitas.show',['fasilitas'=>$item->id])}}"><h2>{{ $item->nama_fasilitas_hotel }}</h2></a>
+                                        <p>{{ $item->deskripsi_fasilitas_hotel}}</p>
+                                    </div>
+                                    
+                                   
+                                        
+                                    
+                            </div>
+                        </div>
+                </article>
+            </div>
         </div>
-        
+        @endforeach
     </div>
+    </div>
+</section>
 
 @endsection
 

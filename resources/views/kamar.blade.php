@@ -18,13 +18,14 @@
                                     <img src="{{ $item->foto_kamar}}" alt="" class="mt-3">
                                     <div class="blog_details">
                                         <a href="{{ route('guest.kamar.show',['kamar'=>$item->id])}}"><h2>{{ $item->nama_kamar }}</h2></a>
-                                        <p>{{ $item->deskripsi_kamar}}</p>
-                                    </div>
+                                        
+                                        <h4>Rp. {{ $item->harga_kamar}} <small>/ Malam</small></h4>
+                                   
                                     
                                     <div class="card-footer bawah">
-                                        <h4>Rp. {{ $item->harga_kamar}} <small>/ Malam</small></h4>
+                                        <p>{{ $item->deskripsi_kamar}}</p>
                                     </div>
-                                        
+                                </div>
                                     
                             </div>
                         </div>
