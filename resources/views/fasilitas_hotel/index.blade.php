@@ -35,7 +35,7 @@
                 </thead>
                 <tbody>
                     <?php $no = $data->firstItem();?>
-                    @foreach ($data as $item)
+                    @forelse ($data as $item)
                     <tr>
                         <td>{{ $no++}}</td>
                         <td>{{ ($item->nama_fasilitas_hotel)}}</td>
@@ -47,8 +47,14 @@
                                  @endcan
                             
                         </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="5" class="text-center py-5">
+                            <h1>Data Tidak Ada</h1>
+                        </td> 
                     </tr>  
-                    @endforeach
+                    @endforelse
                     
                 </tbody>
             </x-card-body>

@@ -17,7 +17,12 @@
                 </ul>
             </p>
             {{ $item->deskripsi_kamar}}
+            <div class="row">
+                <a href="{{ route('guest.reservasi.create')}}" class="btn btn-md btn-primary mt-3" id="kamar">Pesan</a>
+            </div>
         </div>
+        
     </div>
+    
     
 @endsection

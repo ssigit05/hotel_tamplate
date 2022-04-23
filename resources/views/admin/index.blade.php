@@ -30,7 +30,7 @@
                 </thead>
                 <tbody>
                     <?php $no = $data->firstItem();?>
-                    @foreach ($data as $item)
+                    @forelse ($data as $item)
                     <tr>
                         <td>{{ $no++}}</td>
                         <td>{{ $item->nama}}</td>
@@ -40,8 +40,14 @@
                             <x-btn-edit :link="route('admin.edit',['admin'=>$item->id])"/>
                             <x-btn-delete :link="route('admin.destroy',['admin'=>$item->id])" />
                         </td>
-                    </tr>  
-                    @endforeach
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="5" class="text-center py-5">
+                            <h1>Data Tidak Ada</h1>
+                        </td>
+                    </tr>
+                    @endforelse
                     
                 </tbody>
             </x-card-body>

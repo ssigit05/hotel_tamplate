@@ -2,14 +2,16 @@
 @section('content')
 <div class="container">
     <div class="section_title text-center">
-        <h2 class="title_color">Ssgit Hotel</h2>
+        <h2 class="title_color">The Mulia Bali</h2>
         <p>Kita semua hidup di zaman yang menjadi milik anak muda di hati. Hidup yang menjadi sangat cepat, </p>
     </div>
     <div class="row mb_30">
         @foreach ($kamar as $item)
         <div class="col-lg-3 col-sm-6">
             <div class="accomodation_item text-center">
+                
                 <div class="hotel_img">
+                    <h6 class="tersedia"> Kamar Tersedia : {{$item->kamar_kosong}}</h6>
                     <img src="{{ $item->foto_kamar}}" alt="">
                     <a href="{{ route('guest.kamar.show',['kamar'=>$item->id])}}" class="btn theme_btn button_hover">Lihat</a>
                 </div>

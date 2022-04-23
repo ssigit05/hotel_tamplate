@@ -45,7 +45,7 @@
           <img src="{{ public_path('images/ssgit.png')}}" width="100">
           <h2 style="margin:0;">{{ config('app.name')}}</h2>
           <p>
-            Jl. Raya Pangandaran, Kabupaten Pangandaran<br />
+            Kawasan Sawangan, Jl. Raya Nusa Dua Selatan Jl. Nusa Dua, Benoa, Kec. Kuta Sel., Kabupaten Badung, Bali 80363<br />
             Tlp. (0265) 0605 0310
           </p>
         </td>
@@ -80,6 +80,7 @@
           <th>Tipe Kamar</th>
           <th>JML</th>
           <th>Harga Satuan</th>
+          <th>Lamanya</th>
           <th>Total Harga</th>
         </tr>
       </thead>
@@ -89,6 +90,7 @@
           <td>{{ $kamar->nama_kamar}}</td>
           <td>{{ $item->jum_kamar_dipesan}}</td>
           <td>Rp. {{ $kamar->harga_kamar}}</td>
+          <td>{{ $item->lamanya}}</td>
           <td>Rp.  {{ $item->total}}</td>
         </tr>
       </tbody>

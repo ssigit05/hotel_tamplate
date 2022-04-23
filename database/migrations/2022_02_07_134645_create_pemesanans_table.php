@@ -19,7 +19,7 @@ class CreatePemesanansTable extends Migration
                 ->nullable()
                 ->constrained('kamars')
                 ->onUpdate('cascade')
-                ->onDelete('set null');
+                ->onDelete('cascade');
             $table->date('tgl_checkin');
             $table->date('tgl_checkout');
             $table->integer('jum_kamar_dipesan');

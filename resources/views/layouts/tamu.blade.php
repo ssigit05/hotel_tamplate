@@ -49,12 +49,20 @@
                             <p>Hotel kami berdiri sejak 2021 awal januari hingga sekarang kami masih mengembangkan hotel kami.</p>
                         </div>
                     </div>
-                    												
+                    <div class="col-lg-3 col-md-6-sm-6">
+                        <div class="single-footer-widget">
+                            <h6 class="footer_title">Alamat</h6>
+                            <p>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3942.679866530494!2d115.21999346445686!3d-8.816115143668663!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd25ccdc33d4bab%3A0xc10b8c22a6bfc3f6!2sMulia%20Resort%20-%20Nusa%20Dua%20Bali!5e0!3m2!1sid!2sid!4v1648030877844!5m2!1sid!2sid" width="512" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                            </p>   
+                        </div>
+                     
+                    </div>												
                 </div>
                 <div class="border_line"></div>
                 <div class="row footer-bottom d-flex justify-content-between align-items-center">
                     <p class="col-lg-8 col-sm-12 footer-text m-0"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#" target="_blank">SsgitHotel</a>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#" target="_blank">The Mulia Bali</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                     <div class="col-lg-4 col-sm-12 footer-social">
                         <a href="#"><i class="fa fa-facebook"></i></a>

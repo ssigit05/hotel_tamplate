@@ -14,6 +14,7 @@ class Kamar extends Model
     public $fillable = [
         'nama_kamar',
         'foto_kamar',
+        'kamar_kosong',
         'jum_kamar',
         'harga_kamar',
         'deskripsi_kamar'

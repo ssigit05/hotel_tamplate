@@ -24,7 +24,7 @@ class KamarController extends Controller
     {
         $search = $request->search;
 
-        $data = Kamar::select('id','nama_kamar','jum_kamar','harga_kamar')
+        $data = Kamar::select('id','nama_kamar','jum_kamar','harga_kamar','kamar_kosong')
             ->when($search, function($query, $search){
                 return $query->where('nama_kamar','like',"%{$search}%")
                                 ->orWhere('harga_kamar','like',"%{$search}%");
@@ -67,6 +67,7 @@ class KamarController extends Controller
         Kamar::create([
             'nama_kamar'=>$request->nama_kamar,
             'foto_kamar'=>$filename,
+            'kamar_kosong'=> $request->jumlah_kamar,
             'jum_kamar'=>$request->jumlah_kamar,
             'harga_kamar'=>$request->harga_kamar,
             'deskripsi_kamar'=>$request->deskripsi_kamar

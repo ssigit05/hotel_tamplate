@@ -31,17 +31,19 @@
                         <th>Nama Kamar</th>
                         <th>Jumlah Kamar</th>
                         <th>Harga Kamar</th>
+                        <th>Kamar Kosong</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $no = $data->firstItem();?>
-                    @foreach ($data as $item)
+                    @forelse ($data as $item)
                     <tr>
                         <td>{{ $no++}}</td>
                         <td>{{ ucwords($item->nama_kamar)}}</td>
                         <td>{{ $item->jum_kamar}}</td>
                         <td>Rp. {{ number_format($item->harga_kamar,0,',','.')}}</td>
+                        <td>{{ $item->kamar_kosong}} Tersedia</td>
                         <td>
                             @can('role', 'admin')
                                 <a href="{{ route('kamar.fasilitas.index',['kamar'=>$item->id])}}"
@@ -57,8 +59,14 @@
                             @endcan
                             
                         </td>
-                    </tr>  
-                    @endforeach
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="6" class="text-center py-5">
+                            <h1>Data Tidak Ada</h1>
+                        </td>
+                    </tr>
+                    @endforelse
                     
                 </tbody>
             </x-card-body>

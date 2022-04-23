@@ -3,8 +3,8 @@
         <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
         <div class="container">
             <div class="banner_content text-center">
-                <h6>Selamat Datang Kamu><</h6>
-                <h2>Hotel Ssgit</h2>
+                <h6>Selamat Datang</h6>
+                <h2>The Mulia Bali</h2>
                 <p>Kami menyediakan kamar kamar berkualitas dan terjaga<br> Harga murah tetapi kualitas rendah?Itu bukan disini!</p>
                 <a href="{{ route('guest.reservasi.create')}}" class="btn theme_btn button_hover">Get Started</a>
             </div>
@@ -24,7 +24,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-white border-0">Check In</span>
                                     </div>
-                                    <input type="date"  name="checkin"class="form-control rounded" placeholder="Check In">
+                                    <input type="date"  name="checkin" class="form-control rounded" placeholder="Check In">
                                 </div>
                             </div>
                             <div class="col-md">

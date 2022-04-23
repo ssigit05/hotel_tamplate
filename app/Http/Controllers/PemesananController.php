@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Pemesanan;
 use App\Helper\Lamanya;
 use App\Models\Kamar;
+use DB;
 
 class PemesananController extends Controller
 {
@@ -51,7 +52,7 @@ class PemesananController extends Controller
         $pemesanan->tgl_checkin = date('d/m/Y', strtotime($pemesanan->tgl_checkin));
         $pemesanan->tgl_checkout = date('d/m/Y', strtotime($pemesanan->tgl_checkout));
         $kamar->nama_kamar = ucwords($kamar->nama_kamar);
-        $bayar = $kamar->harga_kamar * $pemesanan->jum_kamar_dipesan;
+        $bayar = $kamar->harga_kamar * $pemesanan->jum_kamar_dipesan * $pemesanan->lamanya;
         $pemesanan->bayar = number_format($bayar,0,',','.');
         $pemesanan->tgl_dibuat = date('d/m/Y H:i:s', strtotime( $pemesanan->created_at));
         $pemesanan->value_status = $pemesanan->status;
@@ -67,16 +68,188 @@ class PemesananController extends Controller
         return view('pemesanan.show',['pemesanan'=>$pemesanan,'kamar'=>$kamar,'option'=>$option]);
     }
 
-    public function update(Request $request, Pemesanan $pemesanan)
+    public function update(Request $request, Pemesanan $pemesanan, Kamar $kamar)
     {
         $request->validate([
             'status'=>'required|in:pesan,checkin,checkout,batal',
         ]);
 
-        $pemesanan->update([
-            'status'=>$request->status,
-        ]);
-        return back()->with('status','update');
+        // $pemesanan->update([
+        //     'status'=>$request->status,
+        // ]);
+
+
+         // Status Tidak Berubah
+         $kamar = DB::table('kamars')->where('id',$pemesanan->kamar_id)->first();
+         if ($pemesanan->status === $request->status) {
+             $pemesanan->update([
+                 'status' => $request->status,
+             ]);
+ 
+           
+             return back()->with('status','nochange');
+         }
+ 
+
+         // pesan Status
+         if($pemesanan->status === "pesan" && $request->status === "checkin") {
+             $pemesanan->update([
+                 'status' => $request->status,
+             ]);
+                return back()->with('status','update');
+
+         }
+ 
+         elseif($pemesanan->status === "pesan" && $request->status === "checkout") {
+             $kamar = DB::table('kamars')->where('id',$pemesanan->kamar_id)->first();
+             $kamar_kosong = $kamar->kamar_kosong + $pemesanan->jum_kamar_dipesan;
+ 
+             DB::table('kamars')
+             ->where('id',$pemesanan->kamar_id)
+             ->update(['kamar_kosong'=>$kamar_kosong]);
+ 
+             $pemesanan->update([
+                 'status' => $request->status,
+             ]);
+
+             return back()->with('status','update');
+         }
+         
+         elseif($pemesanan->status === "pesan" && $request->status === "batal"){
+             $kamar = DB::table('kamars')->where('id',$pemesanan->kamar_id)->first();
+             $kamar_kosong = $kamar->kamar_kosong + $pemesanan->jum_kamar_dipesan;
+
+             DB::table('kamars')
+             ->where('id',$pemesanan->kamar_id)
+             ->update(['kamar_kosong'=>$kamar_kosong]);
+
+             $pemesanan->update([
+                 'status' => $request->status
+
+             ]);
+
+             return back()->with('status','update');
+         }
+
+
+         // Checkin Status
+         if ($pemesanan->status === "checkin" && $request->status === "pesan"){
+             $pemesanan->update([
+                 'status' => $request->status
+             ]);
+
+             return back()->with('status','update');
+         }
+
+         elseif($pemesanan->status === "checkin" && $request->status === "checkout"){
+             $kamar = DB::table('kamars')->where('id',$pemesanan->kamar_id)->first();
+             $kamar_kosong = $kamar->kamar_kosong + $pemesanan->jum_kamar_dipesan;
+
+             DB::table('kamars')
+             ->where('id',$pemesanan->kamar_id)
+             ->update(['kamar_kosong'=>$kamar_kosong]);
+
+             $pemesanan->update([
+                 'status' => $request->status
+             ]);
+
+             return back()->with('status','update');
+         }
+
+         elseif($pemesanan->status === "checkin" && $request->status === "batal"){
+            $kamar = DB::table('kamars')->where('id',$pemesanan->kamar_id)->first();
+            $kamar_kosong = $kamar->kamar_kosong + $pemesanan->jum_kamar_dipesan;
+
+            DB::table('kamars')
+            ->where('id',$pemesanan->kamar_id)
+            ->update(['kamar_kosong'=>$kamar_kosong]);
+
+            $pemesanan->update([
+                'status' => $request->status
+            ]);
+
+            return back()->with('status','update');
+        }
+
+        // Checkout Status
+        if ($pemesanan->status === "checkout" && $request->status === "batal"){
+            $pemesanan->update([
+                'status' => $request->status
+            ]);
+
+            return back()->with('status','update');
+        }
+
+        elseif($pemesanan->status === "checkout" && $request->status === "checkin"){
+            $kamar = DB::table('kamars')->where('id',$pemesanan->kamar_id)->first();
+            $kamar_kosong = $kamar->kamar_kosong - $pemesanan->jum_kamar_dipesan;
+
+            DB::table('kamars')
+            ->where('id',$pemesanan->kamar_id)
+            ->update(['kamar_kosong'=>$kamar_kosong]);
+
+            $pemesanan->update([
+                'status' => $request->status
+            ]);
+
+            return back()->with('status','update');
+        }
+
+        elseif($pemesanan->status === "checkout" && $request->status === "pesan"){
+           $kamar = DB::table('kamars')->where('id',$pemesanan->kamar_id)->first();
+           $kamar_kosong = $kamar->kamar_kosong - $pemesanan->jum_kamar_dipesan;
+
+           DB::table('kamars')
+           ->where('id',$pemesanan->kamar_id)
+           ->update(['kamar_kosong'=>$kamar_kosong]);
+
+           $pemesanan->update([
+               'status' => $request->status
+           ]);
+
+           return back()->with('status','update');
+       }
+
+
+        // Batal Status
+        if ($pemesanan->status === "batal" && $request->status === "checkout"){
+            $pemesanan->update([
+                'status' => $request->status
+            ]);
+
+            return back()->with('status','update');
+        }
+
+        elseif($pemesanan->status === "batal" && $request->status === "checkin"){
+            $kamar = DB::table('kamars')->where('id',$pemesanan->kamar_id)->first();
+            $kamar_kosong = $kamar->kamar_kosong - $pemesanan->jum_kamar_dipesan;
+
+            DB::table('kamars')
+            ->where('id',$pemesanan->kamar_id)
+            ->update(['kamar_kosong'=>$kamar_kosong]);
+
+            $pemesanan->update([
+                'status' => $request->status
+            ]);
+
+            return back()->with('status','update');
+        }
+
+        elseif($pemesanan->status === "batal" && $request->status === "pesan"){
+           $kamar = DB::table('kamars')->where('id',$pemesanan->kamar_id)->first();
+           $kamar_kosong = $kamar->kamar_kosong - $pemesanan->jum_kamar_dipesan;
+
+           DB::table('kamars')
+           ->where('id',$pemesanan->kamar_id)
+           ->update(['kamar_kosong'=>$kamar_kosong]);
+
+           $pemesanan->update([
+               'status' => $request->status
+           ]);
+
+           return back()->with('status','update');
+       }
+
     }
     public function status($status)
     {

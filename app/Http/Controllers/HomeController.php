@@ -12,7 +12,7 @@ class HomeController extends Controller
     public function index()
     {
         $fasilitas = FasilitasHotel::select('id','nama_fasilitas_hotel','foto_fasilitas_hotel')->get();
-        $kamar = Kamar::select('id','foto_kamar','nama_kamar','harga_kamar')->get();
+        $kamar = Kamar::select('id','foto_kamar','nama_kamar','harga_kamar','kamar_kosong')->get();
 
         $fasilitas->map(function($item){
             $item->nama_fasilitas_hotel = ucwords($item->nama_fasilitas_hotel);

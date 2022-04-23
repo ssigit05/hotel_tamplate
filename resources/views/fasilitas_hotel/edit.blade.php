@@ -15,7 +15,7 @@
                 </div>
             <x-input Label="Foto" name="foto" type="file" keterangan="Foto bertipe : png,jpg,jpeg. Dimensi : min height 500px, min width 1000px. Ukuran : min 50kb, max 5000kb."/>
             <x-textarea Label="Deskripsi" name="deskripsi" :value="$item->deskripsi_fasilitas_hotel"/>
-        </x-form-create>
+        </x-form-edit>
         </div>
     </div>
 @endsection

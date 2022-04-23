@@ -9,6 +9,7 @@
                 
                 <div class="card-header p-1"></div>
                 <div class="card-body">
+                    <x-status/>
                     <x-input-reservasi label="Check In" 
                     name="checkin" type="date" :value="request()->checkin"
                     />

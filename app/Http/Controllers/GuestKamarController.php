@@ -9,9 +9,15 @@ use App\Models\FasilitasKamar;
 
 class GuestKamarController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $kamar = Kamar::select('id','nama_kamar','foto_kamar','deskripsi_kamar','harga_kamar')->get();
+        $search = $request->search;
+        $kamar = Kamar::select('id','nama_kamar','foto_kamar','deskripsi_kamar','harga_kamar','kamar_kosong')
+        ->when( $search, function ($query, $search){
+            return $query->where('nama_kamar','like',"%{$search}%")
+            ->orWhere('harga_kamar','like',"%{$search}%");
+        })
+        ->get();
 
         $kamar->map(function($item){
             $item->nama_kamar = ucwords($item->nama_kamar);

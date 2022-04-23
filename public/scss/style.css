@@ -68,3 +68,19 @@ body .btn-sgit {
   font-size: 22px;
   font-family: 'Assistant', sans-serif;
 }
+
+.container .row .col-md-3 .blog_left_sidebar .row .col-md-12 .blog_post  h6{
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: oblique;
+
+}
+.tersedia{
+  /* padding-top: -30px; */
+  
+  /* margin-top: -30px; */
+  margin-right: 100px;
+  margin-bottom: -50px;
+  position: absolute;
+  background-color: transparent;
+  color :#04091e;
+}

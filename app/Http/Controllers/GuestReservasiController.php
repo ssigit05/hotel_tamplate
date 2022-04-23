@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Kamar;
 use App\Models\Pemesanan;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Helper\Lamanya;
+use DB;
 
 class GuestReservasiController extends Controller
 {
@@ -19,18 +21,33 @@ class GuestReservasiController extends Controller
         $kamar->toArray();
         return view('reservasi',['kamar'=>$kamar]);
     }
-    public function store(Request $request)
+    public function store(Request $request,Kamar $kamar)
     {
+        $kamar = Kamar::select('id','jum_kamar')->get();
         $request->validate([
             'checkin'=>'required|date|after:today',
             'checkout'=>'required|date|after:checkin',
             'kamar'=>'required|numeric|integer',
             'jumlah_kamar'=>'required|numeric|integer|gt:0',
-            'nama_pemesan'=>'required',
+            'nama_pemesan'=>'required|regex:/^[a-zA-Z]/u',
             'email'=>'required|email',
             'nomor_handphone'=>'required',
-            'nama_tamu'=>'required',
+            'nama_tamu'=>'required|regex:/^[a-zA-Z]/u',
         ]);
+
+
+        // JUmlah Kamar
+        $kamar =  DB::table('kamars')->where('id',$request->kamar)->first();
+        $kamar_kosong = $kamar->kamar_kosong - $request->jumlah_kamar;
+
+        if ($kamar_kosong < 0){
+           return back()->with('status','null');
+        }
+        
+
+        DB::table('kamars')
+        ->where('id',$request->kamar)
+        ->update(['kamar_kosong' => $kamar_kosong]);
 
         $pemesanan = Pemesanan::create([
             'kamar_id'=>$request->kamar,
@@ -58,11 +75,13 @@ class GuestReservasiController extends Controller
         $pemesanan->nama_tamu = ucwords($pemesanan->nama_tamu);
         $pemesanan->tgl_checkin = date('l, d M Y', strtotime($pemesanan->tgl_checkin));
         $pemesanan->tgl_checkout = date('l, d M Y', strtotime($pemesanan->tgl_checkout));
+        $pemesanan->lamanya=Lamanya::get($pemesanan->tgl_checkin,$pemesanan->tgl_checkout);
 
         $kamar = Kamar::find($pemesanan->kamar_id);
 
-        $total = $kamar->harga_kamar * $pemesanan->jum_kamar_dipesan;
+        $total = $kamar->harga_kamar * $pemesanan->jum_kamar_dipesan * $pemesanan->lamanya;
         $pemesanan->total = number_format($total, 0, '.',',');
+        
         $kamar->nama_kamar = ucwords($kamar->nama_kamar);
         $kamar->harga_kamar = number_format($kamar->harga_kamar, 0, '.',',');
 

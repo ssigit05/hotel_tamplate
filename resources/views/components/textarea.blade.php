@@ -3,7 +3,9 @@
     <label><?= $label ?></label>
     <textarea type="{{ $type }}" 
     name="{{ $name }}"
-    class="form-control{{ $errors->has($name) ? ' is-invalid' : '' }}">{{ old($name,$value)}}</textarea>
+    class="form-control{{ $errors->has($name) ? ' is-invalid' : '' }}">
+    {{ old($name,$value)}}
+    </textarea>
     @error($name)
         <div class="invalid-feedback">
             {{ $message}}

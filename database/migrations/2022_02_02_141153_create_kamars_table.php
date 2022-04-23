@@ -18,6 +18,7 @@ class CreateKamarsTable extends Migration
             $table->string('nama_kamar');
             $table->string('foto_kamar')->nullable();
             $table->integer('jum_kamar');
+            $table->integer('kamar_kosong');
             $table->integer('harga_kamar')->nullable();
             $table->text('deskripsi_kamar')->nullable();
             // $table->timestamps();
