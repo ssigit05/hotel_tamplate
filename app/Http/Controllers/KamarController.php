@@ -136,6 +136,7 @@ class KamarController extends Controller
                 'nama_kamar'=>$request->nama_kamar,
                 'foto_kamar'=>$filename,
                 'jum_kamar'=>$request->jumlah_kamar,
+                'kamar_kosong'=> $request->jumlah_kamar,
                 'harga_kamar'=>$request->harga_kamar,
                 'deskripsi_kamar'=>$request->deskripsi_kamar
             ];
@@ -143,6 +144,7 @@ class KamarController extends Controller
             $arr =[
                 'nama_kamar'=>$request->nama_kamar,
                 'jum_kamar'=>$request->jumlah_kamar,
+                'kamar_kosong'=> $request->jumlah_kamar,
                 'harga_kamar'=>$request->harga_kamar,
                 'deskripsi_kamar'=>$request->deskripsi_kamar
             ];

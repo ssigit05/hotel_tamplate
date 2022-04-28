@@ -5,21 +5,75 @@
         <h2 class="title_color">The Mulia Bali</h2>
         <p>Kita semua hidup di zaman yang menjadi milik anak muda di hati. Hidup yang menjadi sangat cepat, </p>
     </div>
+    <section>
+        <a href="{{ route('guest.kamar.index')}}">
+            <div class="next">
+                <div class="text">
+                    <h1>LIHAT KAMAR LAINNYA</h1>
+                </div>
+                
+                <div class="icon">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+                
+            </div>
+        </a>
+        
+    </section>
     <div class="row mb_30">
-        @foreach ($kamar as $item)
+        
         <div class="col-lg-3 col-sm-6">
             <div class="accomodation_item text-center">
                 
                 <div class="hotel_img">
-                    <h6 class="tersedia"> Kamar Tersedia : {{$item->kamar_kosong}}</h6>
-                    <img src="{{ $item->foto_kamar}}" alt="">
-                    <a href="{{ route('guest.kamar.show',['kamar'=>$item->id])}}" class="btn theme_btn button_hover">Lihat</a>
+                    <h6 class="tersedia"> Kamar Tersedia : {{$kamar[0]->kamar_kosong}}</h6>
+                    <img src="{{ $kamar[0]->foto_kamar}}" alt="">
+                    <a href="{{ route('guest.kamar.show',['kamar'=>$kamar[0]->id])}}" class="btn theme_btn button_hover">Lihat</a>
                 </div>
-                <a href="#"><h4 class="sec_h4">{{ $item->nama_kamar }}</h4></a>
-                <h5>Rp. {{$item->harga_kamar}} <small>/ Malam</small></h5>
+                <a href="#"><h4 class="sec_h4">{{ $kamar[0]->nama_kamar }}</h4></a>
+                <h5>Rp. {{$kamar[0]->harga_kamar}} <small>/ Malam</small></h5>
             </div>
         </div>
-        @endforeach  
+
+        <div class="col-lg-3 col-sm-6">
+            <div class="accomodation_item text-center">
+                
+                <div class="hotel_img">
+                    <h6 class="tersedia"> Kamar Tersedia : {{$kamar[1]->kamar_kosong}}</h6>
+                    <img src="{{ $kamar[1]->foto_kamar}}" alt="">
+                    <a href="{{ route('guest.kamar.show',['kamar'=>$kamar[1]->id])}}" class="btn theme_btn button_hover">Lihat</a>
+                </div>
+                <a href="#"><h4 class="sec_h4">{{ $kamar[1]->nama_kamar }}</h4></a>
+                <h5>Rp. {{$kamar[1]->harga_kamar}} <small>/ Malam</small></h5>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-6">
+            <div class="accomodation_item text-center">
+                
+                <div class="hotel_img">
+                    <h6 class="tersedia"> Kamar Tersedia : {{$kamar[2]->kamar_kosong}}</h6>
+                    <img src="{{ $kamar[2]->foto_kamar}}" alt="">
+                    <a href="{{ route('guest.kamar.show',['kamar'=>$kamar[2]->id])}}" class="btn theme_btn button_hover">Lihat</a>
+                </div>
+                <a href="#"><h4 class="sec_h4">{{ $kamar[2]->nama_kamar }}</h4></a>
+                <h5>Rp. {{$kamar[2]->harga_kamar}} <small>/ Malam</small></h5>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-6">
+            <div class="accomodation_item text-center">
+                
+                <div class="hotel_img">
+                    <h6 class="tersedia"> Kamar Tersedia : {{$kamar[3]->kamar_kosong}}</h6>
+                    <img src="{{ $kamar[3]->foto_kamar}}" alt="">
+                    <a href="{{ route('guest.kamar.show',['kamar'=>$kamar[3]->id])}}" class="btn theme_btn button_hover">Lihat</a>
+                </div>
+                <a href="#"><h4 class="sec_h4">{{ $kamar[3]->nama_kamar }}</h4></a>
+                <h5>Rp. {{$kamar[3]->harga_kamar}} <small>/ Malam</small></h5>
+            </div>
+        </div>
+        
     </div>
 </div>
 @endsection

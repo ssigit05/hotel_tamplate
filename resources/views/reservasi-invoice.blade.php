@@ -90,7 +90,7 @@
           <td>{{ $kamar->nama_kamar}}</td>
           <td>{{ $item->jum_kamar_dipesan}}</td>
           <td>Rp. {{ $kamar->harga_kamar}}</td>
-          <td>{{ $item->lamanya}}</td>
+          <td>{{ $item->lamanya}}/Malam</td>
           <td>Rp.  {{ $item->total}}</td>
         </tr>
       </tbody>

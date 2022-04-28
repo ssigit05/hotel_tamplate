@@ -82,5 +82,34 @@ body .btn-sgit {
   margin-bottom: -50px;
   position: absolute;
   background-color: transparent;
-  color :#04091e;
+  color: #1f0209;
+  font-style: oblique;
+}
+
+.accomodation_area .container section a .next{
+  margin-bottom: 5px;
+  display: flex;
+  height: 50px;
+  color: #04091e;
+  width: 1125px;
+}
+.accomodation_area .container section a .next:hover{
+  
+  color: #B8405E;
+}
+.accomodation_area .container section a .next h1{
+  font-size: 20px;
+  
+  
+}
+.accomodation_area .container section a .next .text{
+  height: 50px;
+  padding-top: 12.5px;
+  width: 562.5px;
+}
+.accomodation_area .container section a .next .icon {
+  margin-left: 50%;
+  height: 50px;
+  padding-top: 12.5px;
+  
 }
