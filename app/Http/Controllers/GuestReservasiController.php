@@ -5,12 +5,64 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Kamar;
 use App\Models\Pemesanan;
+use App\Helper\ImageUrl;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Helper\Lamanya;
+use App\Models\FasilitasKamar;
+
 use DB;
 
 class GuestReservasiController extends Controller
 {
+    public function index(Kamar $kamar)
+    {        
+        $kamar->nama_kamar=ucwords($kamar->nama_kamar);
+        $kamar->foto_kamar=ImageUrl::get('images/kamar/',$kamar->foto_kamar);
+        $kamar->harga_kamar=number_format($kamar->harga_kamar,0,',','.');
+
+        $fasilitas=FasilitasKamar::where('kamar_id',$kamar->id)->get();
+        $kamar->nama_fasilitas_kamar=FasilitasKamar::get('nama_fasilitas_kamar',$kamar->nama_fasilitas_kamar);
+
+        return view('order',['kamar'=>$kamar,'fasilitas'=>$fasilitas]);
+        
+    }
+    
+    public function booking(Request $request, Kamar $kamar)
+    {
+        $kamar =  DB::table('kamars')->where('id',$kamar->id)->first();
+        $kamar_kosong = $kamar->kamar_kosong;
+
+        $request->validate([
+            'checkin'=>'required|date|after:today',
+            'checkout'=>'required|date|after:checkin',
+            'jumlah_kamar'=>"required|numeric|integer|min:1|max:{$kamar_kosong}",
+            'nama_pemesan'=>'required|max:40|regex:/^[a-zA-ZÑñ\s\.]+$/',
+            'email'=>'required|email',
+            'nomor_handphone'=>'required|numeric|min:1,max:13',
+            'nama_tamu'=>'required|max:40|regex:/^[a-zA-ZÑñ\s\.]+$/'
+        ]
+    );
+
+
+        DB::table('kamars')
+        ->where('id',$kamar->id)
+        ->update(['kamar_kosong' => $kamar_kosong - $request->jumlah_kamar]);
+
+
+        $pemesanan=Pemesanan::create([
+            'kamar_id'=>$kamar->id,
+            'tgl_checkin'=>$request->checkin,
+            'tgl_checkout'=>$request->checkout,
+            'jum_kamar_dipesan'=>$request->jumlah_kamar,
+            'nama_pemesan'=>$request->nama_pemesan,
+            'email_pemesan'=>$request->email,
+            'no_hp'=>$request->nomor_handphone,
+            'nama_tamu'=>$request->nama_tamu,
+            'status'=>'pesan'
+        ]);
+
+        return redirect()->route('guest.reservasi.show',['pemesanan'=>$pemesanan->id]);
+    }
     public function create()
     {
         $kamar = Kamar::select('id as value','nama_kamar as option')->get();

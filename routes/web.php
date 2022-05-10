@@ -25,6 +25,8 @@ Route::post('reservasi', 'GuestReservasiController@store');
 Route::get('reservasi/{pemesanan}', 'GuestReservasiController@show')->name('guest.reservasi.show');
 Route::get('reservasi/{pemesanan}/invoice', 'GuestReservasiController@invoice')->name('guest.reservasi.invoice');
 
+Route::get('booking/{kamar}', 'GuestReservasiController@index')->name('reservasi.index');
+Route::post('booking/{kamar}', 'GuestReservasiController@booking')->name('reservasi.create');
 
 
 Route::group([
@@ -47,6 +49,7 @@ Route::group([
         Route::get('pemesanan/{pemesanan}','PemesananController@show')->name('pemesanan.show');
         Route::put('pemesanan/{pemesanan}','PemesananController@update')->name('pemesanan.update');
 
+        
         Route::resource('kamar', 'KamarController');
         Route::resource('fasilitas','FasilitasHotelController');
         
